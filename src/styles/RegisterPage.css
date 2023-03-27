@@ -1,0 +1,15 @@
+h1{
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+img{
+    margin-left: 10px;
+    height: 50px;
+}

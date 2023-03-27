@@ -1,0 +1,9 @@
+.buttons-left{
+    margin-right: auto;
+    visibility: hidden;
+}
+
+.buttons-right{
+    margin-left: auto;
+    gap: 1;
+}
