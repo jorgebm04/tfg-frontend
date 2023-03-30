@@ -2,7 +2,7 @@ import React from 'react';
 // import { Suscription } from '../../models/suscription.class';
 import "../../styles/suscription_main.css"
 
-const SuscriptionTree = ({addSuscription, showModal}) => {
+const SuscriptionTree = ({showModal}) => {
 
   return (
     <div className='row-left'>

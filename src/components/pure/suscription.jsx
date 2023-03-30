@@ -1,36 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Suscription } from '../../models/suscription.class';
 
 const SuscriptionComponenet = ({ suscription }) => {
 
     
 
     return (
-        <tr className='fw-normal'>
-            <th>
+        <tr>
+            <th scope='row'>
                 <i className='bi-toggle-on'></i>
             </th>
-            <td className='align-middle'>
+            <td>
                 <span>{suscription.name}</span>
             </td>
-            <td className='align-middle'>
+            <td>
                 <span>{suscription.price}</span>
             </td>
-            <td className='align-middle'>
-                <span>{suscription.payDate}</span>
+            <td>
+                <span>{suscription.contractDate}</span>
             </td>
-            <td className='align-middle'>
+            <td>
                 <button>Ver detalles</button>
             </td>
         </tr>
     );
 };
-
-
-SuscriptionComponenet.propTypes = {
-    suscription: PropTypes.instanceOf(Suscription)
-};
-
 
 export default SuscriptionComponenet;

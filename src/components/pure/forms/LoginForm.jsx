@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import axios from 'axios';
 import * as yup from 'yup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -29,10 +30,27 @@ const LoginForm = () => {
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            await new Promise((r) => setTimeout(r, 1000))
-            alert(JSON.stringify(values, null, 2));
-            localStorage.setItem('credentials',formik.values)
-            navigate('/suscription')
+            try {
+                await axios.post("http://localhost:8080/login", {
+                    email: values.email,
+                    password: values.password,
+                }).then((res) => {
+                    console.log(res.data);
+                    if (res.data.message === "Email doesn`t exists") {
+                        alert("Email doesn`t exists")
+                    } else if (res.data.message === "Login Success") {
+                        localStorage.setItem('userId', res.data.idUser)
+                        navigate('/suscription')
+                    } else {
+                        alert("Incorrect. Email and Password doesn`t match")
+                    }
+                }, fail => {
+                    console.error(fail);
+                });
+
+            } catch (err) {
+                alert(err);
+            }
         },
     });
 
@@ -62,12 +80,12 @@ const LoginForm = () => {
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
                 />
-                
-                <Button sx={{ backgroundColor: "#8080ff", ":hover":{backgroundColor:"#9a9ac4"}}} fullWidth variant="contained"  type="submit">
+
+                <Button sx={{ backgroundColor: "#8080ff", ":hover": { backgroundColor: "#9a9ac4" } }} fullWidth variant="contained" type="submit">
                     Iniciar Sesion
                 </Button>
 
-                
+
             </form>
         </div>
     );

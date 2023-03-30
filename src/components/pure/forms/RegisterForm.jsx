@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import axios from 'axios';
 import * as yup from 'yup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -28,7 +29,7 @@ const validationSchema = yup.object({
         .string('Confirma tu contraseña')
         .oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir')
         .required('Este campo es obligatorio'),
-    summary: yup.bool()
+    messages: yup.bool()
 });
 
 const RegisterForm = () => {
@@ -39,12 +40,23 @@ const RegisterForm = () => {
             email: '',
             password: '',
             confirm: '',
-            summary: false
+            messages: false
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            await new Promise((r) => setTimeout(r, 1000))
-            alert(JSON.stringify(values, null, 2));
+            try{
+                await axios.post("http://localhost:8080/user",{
+                    name:values.name,
+                    surname:values.surname,
+                    email:values.email,
+                    password:values.password,
+                    messages:values.messages
+                });
+                alert("User Registration Successfully");
+            } catch(err) {
+                alert(err);
+            }
+            
         },
     });
 
@@ -111,11 +123,11 @@ const RegisterForm = () => {
                 />
                 <FormControlLabel
                     control={<Checkbox
-                        value={formik.values.summary}
+                        value={formik.values.messages}
                         sx={{ color: "#8080ff", '&.Mui-checked': { color: "#8080ff", }, }}
                         onChange={(e) => {
                             const { checked } = e.target;
-                            formik.setFieldValue('summary', checked);
+                            formik.setFieldValue('messages', checked);
                         }}
                     />}
                     label="Deseo recibir correos electrónicos todos los meses con resumenes de gastos" />

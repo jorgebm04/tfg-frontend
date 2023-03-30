@@ -15,14 +15,23 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
+
   }
   
-  .form-content {
-    /* z-index: 1000; */
+  .in-form {
+    margin-left: 0;
   }
 
   h1{
     text-align: center;
     color: #8080ff;
     text-decoration: underline;
+  }
+
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
   }

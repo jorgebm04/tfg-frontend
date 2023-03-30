@@ -1,9 +1,11 @@
 export class User {
     userId = '';
-    username = '';
+    name = '';
+    subscriptions = [];
 
-    constructor(userId,userName){
+    constructor(userId,userName,subscriptions){
         this.userId = userId;
         this.username = userName;
+        this.subscription = subscriptions
     }
 }

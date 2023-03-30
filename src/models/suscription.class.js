@@ -3,15 +3,10 @@ export class Suscription {
     name = '';
     price = 0;
     payDate = '';
-    userId = '';
-    folderId = ''
 
-    constructor(suscriptionId,name,price,payDate,userId,folderId) {
-        this.suscriptionId=suscriptionId;
+    constructor(name,price,payDate) {
         this.name = name;
         this.price = price;
         this.payDate = payDate;
-        this.userId = userId;
-        this.folderId = folderId;
     }
 }

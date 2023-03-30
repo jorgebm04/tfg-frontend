@@ -1,14 +1,15 @@
 import React from 'react';
 import SuscriptionComponenet from '../pure/suscription';
+import "../../styles/SubscriptionList.css"
 
-const SuscriptionListComponent = ({suscriptions}) => {
+const SuscriptionListComponent = ({ subscriptions }) => {
 
     return (
         <div className='row-right'>
             <div className='col-12'>
                 <h3>Tus Suscripciones</h3>
-                <div className='card-body' data-mdb-perfect-scrollbar='true' style={{ position: 'relative', height: '400px' }}>
-                    <table>
+                <div className="scrollable">
+                    <table className="table table-bordered ">
                         <thead>
                             <tr>
                                 <th scope='col'></th>
@@ -18,9 +19,11 @@ const SuscriptionListComponent = ({suscriptions}) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {suscriptions.map((suscription, index) => {
-                                return <SuscriptionComponenet key={index} suscription={suscription}></SuscriptionComponenet>
-                            })} 
+                            
+                                {subscriptions.map((suscription, index) => {
+                                    return <SuscriptionComponenet key={index} suscription={suscription}></SuscriptionComponenet>
+                                })}
+                            
                         </tbody>
                     </table>
                 </div>
