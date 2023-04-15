@@ -2,11 +2,11 @@ export class Suscription {
     suscriptionId=''
     name = '';
     price = 0;
-    payDate = '';
+    contractDate = '';
 
-    constructor(name,price,payDate) {
+    constructor(name,price,contractDate) {
         this.name = name;
         this.price = price;
-        this.payDate = payDate;
+        this.contractDate = contractDate;
     }
 }

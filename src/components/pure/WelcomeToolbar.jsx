@@ -21,7 +21,7 @@ const WelcomeToolbar = ()  => {
             NOMBRE DE LA APP
           </Typography>
           <div className='buttons-right'>
-          <Button className='button' sx={{backgroundColor:"#fff", color:"#8080ff",":hover":{backgroundColor:"#c3c3f8",color:"#fff"}, marginRight:5}} href="/register">Registrarse</Button>
+          <Button className='button' sx={{backgroundColor:"#fff", color:"#8080ff",":hover":{backgroundColor:"#c3c3f8",color:"#fff"}, marginRight:5}} href="register">Registrarse</Button>
           <Button className='button' sx={{backgroundColor:"#fff", color:"#8080ff",":hover":{backgroundColor:"#c3c3f8",color:"#fff"}, marginRight:5}} href="login">Iniciar Sesión</Button>
           </div>   
         </Toolbar>

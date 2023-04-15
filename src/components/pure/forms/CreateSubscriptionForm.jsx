@@ -45,7 +45,7 @@ const CreateSubscriptionForm = ({ showModal,userId,updateList }) => {
                     price: values.price,
                     contractDate: values.contractDate
                 })
-                await updateList({values})
+                updateList(values.name,values.price,values.contractDate)
                 showModal()
             } catch (err) {
                 alert(err);
@@ -102,7 +102,6 @@ const CreateSubscriptionForm = ({ showModal,userId,updateList }) => {
                                 </Button>
                                 <Button onClick={() => showModal()} sx={{ backgroundColor: "#fff", color: "#000", marginLeft: "30px", ":hover": { backgroundColor: "grey" } }} variant="contained">Cerrar</Button>
                             </div>
-
                         </div>
                     </form>
                 </div>

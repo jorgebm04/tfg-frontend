@@ -1,14 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import SubscriptionDetail from '../../components/container/subscriptionDetail';
+
 
 const SuscriptionDetailPage = () => {
-    const params = useParams();
+    const id = useParams();
 
     return (
         <div>
-            <h1>Suscription: {params.id} </h1>
-            <h2>{params.name}</h2>
-            <h3>{params.price}</h3>
+            <SubscriptionDetail subscriptionId={id.idSuscription} />
         </div>
     );
 }

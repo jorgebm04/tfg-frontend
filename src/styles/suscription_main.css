@@ -1,4 +1,5 @@
 .row {
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -9,12 +10,24 @@
   background-color: white;
   padding-left: 40px;
   padding-top: 20px;
+  margin-left: 40px;
+  margin-bottom: 100%;
 }
 
 .row-right {
-  width: 70%;
+  width: 64%;
   border: 1px solid black;
   background-color: white;
   padding-left: 40px;
   padding-top: 20px;
+  margin-left: 40px;
+  margin-bottom: 100%;
+}
+
+#root{
+  background-color: #8080ff;
+}
+
+.button{
+  text-align: end;
 }

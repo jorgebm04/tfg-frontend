@@ -10,6 +10,7 @@ import SuscriptionPage from './pages/suscription/SuscriptionPage'
 import WelcomePage from './pages/welcome/WelcomePage';
 import LoginPage from './pages/login/LoginPage';
 import RegisterPage from './pages/register/RegisterPage';
+import SuscriptionDetailPage from './pages/suscription/SuscriptionDetailPage'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
   {
     path: "suscription",
     element: <SuscriptionPage />,
+    errorElement: <NotFoundPage />
+  },
+  {
+    path:"suscription/:idSuscription",
+    element: <SuscriptionDetailPage />,
     errorElement: <NotFoundPage />
   }
 ]);
