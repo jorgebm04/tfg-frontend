@@ -1,0 +1,13 @@
+.LeftToolbarButtons {
+    margin-right: auto;
+    visibility: hidden;
+}
+
+.RightToolbarButtons {
+    margin-left: auto;
+    gap: 1;
+}
+
+.ToolbarIcon {
+    width: 5%;
+}

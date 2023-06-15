@@ -2,11 +2,22 @@ import React from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom'
+import { Toaster, toast } from 'sonner'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import '../../../styles/RegisterForm.css'
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Background from '../../../images/wallpaper.svg'
 
 const validationSchema = yup.object({
     name: yup
@@ -33,6 +44,9 @@ const validationSchema = yup.object({
 });
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
+    const defaultTheme = createTheme();
+
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -52,7 +66,8 @@ const RegisterForm = () => {
                     password:values.password,
                     messages:values.messages
                 });
-                alert("User Registration Successfully");
+                toast.success("Usuario Registrado Correctamente");
+                navigate('/main')
             } catch(err) {
                 alert(err);
             }
@@ -61,10 +76,37 @@ const RegisterForm = () => {
     });
 
     return (
-        <div>
-            <form onSubmit={formik.handleSubmit}>
-                <label>Los campos marcados con * son obligatorios</label>
-                <TextField
+        <ThemeProvider theme={defaultTheme}>
+        <Toaster position="top-center" expand={false} richColors  />
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage:`url(${Background})`
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Registrese
+            </Typography>
+            <Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
+            <TextField
                     sx={{ marginBottom: '20px' }}
                     fullWidth
                     id="name"
@@ -131,18 +173,22 @@ const RegisterForm = () => {
                         }}
                     />}
                     label="Deseo recibir correos electrónicos todos los meses con resumenes de gastos" />
-                <div>
-                <Button sx={{ backgroundColor: "#8080ff", ":hover":{backgroundColor:"#9a9ac4"}}} variant="contained"  type="submit">
-                    Crear Cuenta
+              <Button sx={{ backgroundColor: "#8080ff", ":hover": { backgroundColor: "#9a9ac4" } }} fullWidth variant="contained" type="submit">
+                    Registrarse
                 </Button>
-                <Button sx={{ backgroundColor: "#fff", color:"#000", marginLeft:"30px", ":hover":{backgroundColor:"grey"}}} variant="contained"  type="reset">
-                    Reset
-                </Button>
-                </div>
-                
-            </form>
-        </div>
+              <Grid container>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"¿Ya tiene una cuenta? Inicie Sesión"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
     );
-};
+}
 
-export default RegisterForm
+export default RegisterForm;

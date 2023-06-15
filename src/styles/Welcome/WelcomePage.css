@@ -1,0 +1,16 @@
+.WelcomePage {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.WelcomeContent {
+    background: url('../../images/wallpaper.svg');
+    height: 100%;
+}
+
+.WelcomeH1{
+    color: #8080ff;
+    text-decoration: underline;
+    text-align: center;
+}
