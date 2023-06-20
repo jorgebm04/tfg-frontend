@@ -12,6 +12,7 @@
 .TreeListContainer {
     display: flex;
     margin-top: 20px;
+    height: 60%;
 }
 
 .TreeContainer {
@@ -20,18 +21,20 @@
     background-color: white;
     padding-left: 40px;
     padding-top: 20px;
-    margin-left: 40px;
-    height: 90%;
+    margin-left: 50px;
     display: flex;
     flex-direction: column;
 }
 
 .ListContainer {
-    width: 60%;
+    width: 70%;
     box-shadow: 0px 0px 10px black;
     background-color: white;
     padding-left: 40px;
     padding-top: 20px;
     margin-left: 40px;
-    height: 90%;
+}
+
+.Tree{
+    overflow: hidden;
 }

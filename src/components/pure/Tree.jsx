@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import FolderIcon from '@mui/icons-material/Folder';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -51,18 +51,20 @@ const TreeNode = ({ node }) => {
   );
 };
 
-const Tree = ({ folders }) => {
+const Tree = ({ folders, searchQuery }) => {
 
   return (
     <ul className='TreeList'>
-        {folders.map((folder) => (
+      {searchQuery !== '' && folders.length === 0 ?
+        <p>No se encontraron resultados.</p> :
+        (folders.map((folder) => (
           <TreeNode node={folder} key={folder.folderId} />
-        ))}
-      </ul>
+        )))
+
+      }
+
+    </ul>
   );
 };
 
 export default Tree;
-
-
-

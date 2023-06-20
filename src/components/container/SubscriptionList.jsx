@@ -27,15 +27,14 @@ const SubscriptionList = ({ subscriptions,showSubDetailModal }) => {
         { field: 'name', headerName: 'Nombre', width: 130,headerClassName: 'super-app-theme--header', headerAlign: 'left',},
         { field: 'price', headerName: 'Precio', type: 'number', width: 130,headerClassName: 'super-app-theme--header',headerAlign: 'left', },
         {
-            field: 'contractDate',
-            headerName: 'Fecha',
+            field: 'nextPaymentDate',
+            headerName: 'Fecha Proximo Cobro',
             type: 'date',
-            width: 130,
+            width: 200,
             headerClassName: 'super-app-theme--header',
             headerAlign: 'left',
         },
-        { field: 'button', headerName: 'Detalles', width: 620, renderCell: renderDetailsButton, headerClassName: 'super-app-theme--header', headerAlign: 'right',
-    cellClassName:'toRight'}
+        { field: 'button', headerName: 'Detalles',flex:1, renderCell: renderDetailsButton, headerClassName: 'super-app-theme--header', headerAlign: 'right',cellAlign :'right'}
     ];
 
     function getRows() {
@@ -44,8 +43,8 @@ const SubscriptionList = ({ subscriptions,showSubDetailModal }) => {
             let id = suscription.subscriptionId;
             let name = suscription.name;
             let price = suscription.price;
-            let contractDate = new Date(suscription.contractDate)
-            list.push({ id, name, price, contractDate })
+            let nextPaymentDate = new Date(suscription.nextPaymentDate)
+            list.push({ id, name, price, nextPaymentDate })
             return null;
         })
         return list;
@@ -58,18 +57,17 @@ const SubscriptionList = ({ subscriptions,showSubDetailModal }) => {
             <h3>Lista de Pagos</h3>
             <Box
                 sx={{
-                    height: '80%',
-                    width: '100%',
-                    '& .super-app-theme--header': {
-                        backgroundColor: '#8080ff',
-                        color:'#fff'
-                    },
-                    '& .toRight': {
-                        justifyContent:'end',
-                    },
+                    width: '95%',
                 }}
             >
-                <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]}/>
+                <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} 
+                    sx={{'& .super-app-theme--header': {
+                        backgroundColor: '#8080ff',
+                        color:'#fff',
+                        height:'80%'
+                    }}}
+
+                />
             </Box>
         </div>
     );

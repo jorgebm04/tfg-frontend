@@ -13,7 +13,7 @@ const AddButton = ({ showSubModal,showFolderModal }) => {
         { icon: <QueueIcon />, name: 'Añadir Suscripcion' }
       ];
     return (
-        <Box sx={{ transform: 'translateZ(0px)', paddingBottom:2}}>
+        <Box sx={{ transform: 'translateZ(0px)', paddingBottom:2,paddingRight:2}}>
       <SpeedDial
         ariaLabel="SpeedDial openIcon example"
         icon={<SpeedDialIcon openIcon={<RemoveIcon />} />}
