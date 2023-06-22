@@ -1,3 +1,5 @@
+To install all the node modules of the project make sure you have npm installed and run the command "npm install" in the route of the project
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
