@@ -19,17 +19,23 @@
     width: 80%;
   }
 
-  .form-content {
+  .form-content-detail {
     display: flex;
   }
 
   .subscriptionDetail{
     width: 50%;
+    border-right: 1px solid #000;
+    padding-right: 10px;
   }
   .subscriptionInformation{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1em;
     margin-left: 10px;
     width: 50%;
   }
-  h1{
+
+  .form-content-detail h1{
     text-align: left;
   }

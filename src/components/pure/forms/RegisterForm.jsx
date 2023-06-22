@@ -65,11 +65,14 @@ const RegisterForm = () => {
                     email:values.email,
                     password:values.password,
                     messages:values.messages
+                }).then((res)=>{
+                  toast.success("Usuario Registrado Correctamente");
+                  localStorage.setItem('userId', res.data)
+                  navigate('/main')
                 });
-                toast.success("Usuario Registrado Correctamente");
-                navigate('/main')
+                
             } catch(err) {
-                alert(err);
+                toast.error(err);
             }
             
         },
