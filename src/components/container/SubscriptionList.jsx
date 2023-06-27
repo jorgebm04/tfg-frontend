@@ -58,13 +58,14 @@ const SubscriptionList = ({ subscriptions,showSubDetailModal }) => {
             <Box
                 sx={{
                     width: '95%',
+                    height: '90%'
                 }}
             >
                 <DataGrid rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} 
                     sx={{'& .super-app-theme--header': {
                         backgroundColor: '#8080ff',
-                        color:'#fff',
-                        height:'80%'
+                        color:'#fff'
+                        
                     }}}
 
                 />

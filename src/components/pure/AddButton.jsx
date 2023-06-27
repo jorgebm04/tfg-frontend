@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
@@ -13,11 +12,11 @@ const AddButton = ({ showSubModal,showFolderModal }) => {
         { icon: <QueueIcon />, name: 'Añadir Suscripcion' }
       ];
     return (
-        <Box sx={{ transform: 'translateZ(0px)', paddingBottom:2,paddingRight:2}}>
+  
       <SpeedDial
         ariaLabel="SpeedDial openIcon example"
         icon={<SpeedDialIcon openIcon={<RemoveIcon />} />}
-        sx={{alignItems:'end',  '& .MuiFab-primary': { width: 70, height: 70 }}}
+        sx={{ alignItems:'end',justifyContent:'end',paddingBottom:'10px',paddingRight:'10px','& .MuiFab-primary': { width: 70, height: 70 }}}
       >
         <SpeedDialAction
           key={actions[0].name}
@@ -32,7 +31,7 @@ const AddButton = ({ showSubModal,showFolderModal }) => {
           onClick={() => showSubModal()}
         />
       </SpeedDial>
-    </Box>
+    
     );
 }
 

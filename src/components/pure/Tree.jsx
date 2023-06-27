@@ -55,13 +55,13 @@ const Tree = ({ folders, searchQuery }) => {
 
   return (
     <ul className='TreeList'>
-      {searchQuery !== '' && folders.length === 0 ?
-        <p>No se encontraron resultados.</p> :
-        (folders.map((folder) => (
+      {/* {searchQuery !== '' || folders.length === 0 ?
+        <p>No se encontraron resultados.</p> : */}
+        {(folders.map((folder) => (
           <TreeNode node={folder} key={folder.folderId} />
-        )))
+        )))}
 
-      }
+      {/* } */}
 
     </ul>
   );
