@@ -257,7 +257,7 @@ const CreateSubscriptionForm = ({ showModal, userId }) => {
                         />
                         <div>
                             <Button sx={{ backgroundColor: "#8080ff", ":hover": { backgroundColor: "#9a9ac4" } }} variant="contained" type="submit">
-                                Añadir Servicio
+                                Crear Suscripción
                             </Button>
                             <Button onClick={() => showModal()} sx={{ backgroundColor: "#fff", color: "#000", marginLeft: "30px", ":hover": { backgroundColor: "grey" } }} variant="contained">
                                 Cerrar

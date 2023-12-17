@@ -80,7 +80,6 @@ const SuscriptionMain = () => {
     }
 
     if (subscriptions && folders) {
-        {console.log(subscriptions)}
         return (
         <div className='TreeListContainer'>
             <SubscriptionTree folders={folders} subscriptions={subscriptions} showSubModal={showSubModal} showFolderModal={showFolderModal} />
