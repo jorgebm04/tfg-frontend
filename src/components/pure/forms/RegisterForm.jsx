@@ -18,6 +18,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Background from '../../../images/wallpaper.svg'
+import { request, setUserId, setAuthToken } from '../../../service/axiosHelper';
 
 const validationSchema = yup.object({
     name: yup
@@ -59,22 +60,27 @@ const RegisterForm = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try{
-                await axios.post("http://localhost:8080/user",{
-                    name:values.name,
-                    surname:values.surname,
-                    email:values.email,
-                    password:values.password,
-                    messages:values.messages
-                }).then((res)=>{
-                  toast.success("Usuario Registrado Correctamente");
-                  localStorage.setItem('userId', res.data)
-                  navigate('/main')
-                });
-                
+              request(
+                "POST",
+                "/register",
+                {
+                  name:values.name,
+                  surname:values.surname,
+                  email:values.email,
+                  password:values.password,
+                  messages:values.messages
+              }
+              ).then((response) => {
+                setUserId(response.data.id)
+                setAuthToken(response.data.token)
+                navigate('/main')
+                toast.success("Usuario Registrado Correctamente");
+              }).catch((error) => {
+                console.log(error)
+              })              
             } catch(err) {
-                toast.error(err);
-            }
-            
+                console.log(err);
+            }       
         },
     });
 

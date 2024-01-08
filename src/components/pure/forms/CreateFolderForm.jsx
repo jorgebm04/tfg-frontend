@@ -1,33 +1,17 @@
-import React, { useEffect,useState } from 'react';
+import React from 'react';
 // import '../../../styles/forms/CreateSubscriptionForm.css';
 import { useFormik } from 'formik';
 import Button from '@mui/material/Button';
 import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import { Autocomplete } from '@mui/material';
 import { Toaster, toast } from 'sonner'
 import '../../../styles/Forms/Forms.css'
+import { request } from '../../../service/axiosHelper';
 
 
-const CreateFolderForm = ({ showModal, userId, updateFolderList }) => {
-
-    const [filteredFolders, setFilteredFolders] = useState([]);
-
-    useEffect(() => {
-        axios.get("http://localhost:8080/users/" + userId + "/folders")
-          .then((result) => {
-            const folders = result.data.map((folder) => ({
-              id: folder.folderId,
-              name: folder.name
-            }));
-            setFilteredFolders(folders);
-          })
-          .catch((error) => {
-            console.error("Error fetching folders:", error);
-          });
-      }, [userId]);
+const CreateFolderForm = ({ showModal, userId, folders }) => {
 
     const navigate = useNavigate()
 
@@ -45,23 +29,21 @@ const CreateFolderForm = ({ showModal, userId, updateFolderList }) => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
-                if (values.parentFolder.id == null) {
-                    await axios.post("http://localhost:8080/users/" + userId + "/folder", {
+                request(
+                    "POST",
+                    "/users/" + userId + "/folders",
+                    {
                         name: values.name,
-                    })
-                } else {
-                    const foundFolder = filteredFolders.find(folder => folder.name === values.parentFolder.name)
-                    if (foundFolder) {
-                        const folderId = foundFolder.id
-                        await axios.post("http://localhost:8080/users/" + userId + "/folder/" + folderId, {
-                            name: values.name,
-                        })
+                        parentFolderId: values.parentFolder.id
                     }
-
-                }
-                toast.success('Carpeta añadida correctamente')
-                showModal()
-                navigate(0)
+                ).then((response) => {
+                    toast.success('Carpeta añadida correctamente')
+                    showModal()
+                    navigate(0)
+                }).catch((error) => {
+                    toast.error('No se ha podido añadir la carpeta')
+                })
+                
             } catch (err) {
                 alert(err);
             }
@@ -90,7 +72,7 @@ const CreateFolderForm = ({ showModal, userId, updateFolderList }) => {
                             <Autocomplete
                                 id='parentFolderId'
                                 name='parentFolderId'
-                                options={filteredFolders}
+                                options={folders}
                                 getOptionLabel={option => option.name}
                                 style={{ width: '300px' }}
                                 onChange={(e, value) => {

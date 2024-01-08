@@ -1,6 +1,5 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom'
 import { Toaster, toast } from 'sonner'
@@ -19,6 +18,7 @@ import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../../../styles/Login/LoginPage.css'
 import Background from '../../../images/wallpaper.svg'
+import { request, setAuthToken, setUserId } from '../../../service/axiosHelper';
 
 
 const validationSchema = yup.object({
@@ -43,23 +43,20 @@ const LoginForm = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
-                await axios.post("http://localhost:8080/login", {
-                    email: values.email,
-                    password: values.password,
-                }).then((res) => {
-                    console.log(res.data);
-                    if (res.data.message === "Email doesn`t exists") {
-                        toast.error('No hay ningun usuario registrado con ese email')
-                    } else if (res.data.message === "Login Success") {
-                        localStorage.setItem('userId', res.data.idUser)
-                        navigate('/main')
-                    } else {
-                        toast.error('La contraseña es incorrecta')
-                    }
-                }, fail => {
-                    console.error(fail);
-                });
-
+              request(
+                "POST",
+                "/login",
+                {
+                  email: values.email,
+                  password: values.password,
+              }
+              ).then((response) => {
+                setAuthToken(response.data.token)
+                setUserId(response.data.id)
+                navigate("/main")
+              }).catch((error) => {
+                console.log(error)
+              })
             } catch (err) {
                 alert(err);
             }

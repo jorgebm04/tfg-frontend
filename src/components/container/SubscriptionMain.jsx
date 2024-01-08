@@ -3,14 +3,14 @@ import SubscriptionList from './SubscriptionList';
 import SubscriptionTree from './SubscriptionTree';
 import CreateSubscriptionForm from '../pure/Forms/CreateSubscriptionForm';
 import CreateFolderForm from '../pure/Forms/CreateFolderForm';
-import axios from 'axios';
 import LoadingComponent from '../pure/LoadingComponent';
 import SubscriptionDetailModal from '../container/SubscriptionDetailModal';
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment';
+import { getUserId, request } from '../../service/axiosHelper';
 
 const SuscriptionMain = () => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserId();
     const navigate = useNavigate();
     const shouldLog = useRef(true)
     const [subscriptions, setSuscriptions] = useState(null);
@@ -28,11 +28,21 @@ const SuscriptionMain = () => {
                 alert('You need to log in first!')
                 navigate('/login')
             }
-            axios.get("http://localhost:8080/users/" + userId + "/foldersFiltered").then((result) => {
-                setfolders(result.data)
+            request(
+                "GET",
+                "/users/" + userId + "/folders",
+                {}
+            ).then((response) => {
+                setfolders(response.data)
+            }).catch((error) => {
+                console.log(error)
             })
-            axios.get("http://localhost:8080/users/" + userId + "/subscriptions").then((result) => {
-                const updatedSubscriptions = result.data.map(subscription => {
+            request(
+                "GET",
+                "/users/" + userId + "/subscriptions",
+                {}
+            ).then((response) => {
+                const updatedSubscriptions = response.data.map(subscription => {
                     const { contractDate, subscriptionFrequency } = subscription;
             
                     const today = moment(); // Get the current date
@@ -57,9 +67,10 @@ const SuscriptionMain = () => {
                     };
                   });
             setSuscriptions(updatedSubscriptions)
+            }).catch((error) => {
+                console.log(error)
             })
         }
-
     }, [navigate, userId])
 
     function showSubModal() {
@@ -84,8 +95,8 @@ const SuscriptionMain = () => {
         <div className='TreeListContainer'>
             <SubscriptionTree folders={folders} subscriptions={subscriptions} showSubModal={showSubModal} showFolderModal={showFolderModal} />
             <SubscriptionList subscriptions={subscriptions} showSubDetailModal={showSubscriptionDetailModal} />
-            {showCreateSubModal ? (<CreateSubscriptionForm showModal={showSubModal} userId={userId} />) : null}
-            {showCreateFolderModal ? (<CreateFolderForm showModal={showFolderModal} userId={userId} />) : null}
+            {showCreateSubModal ? (<CreateSubscriptionForm showModal={showSubModal} userId={userId} folders={folders} />) : null}
+            {showCreateFolderModal ? (<CreateFolderForm showModal={showFolderModal} userId={userId} folders={folders} />) : null}
             {showSubDetailModal ? (<SubscriptionDetailModal showModal={showDetailModal} subscriptionId={subDetail} />) : null} 
         </div>)
     } else {

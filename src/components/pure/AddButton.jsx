@@ -16,7 +16,7 @@ const AddButton = ({ showSubModal,showFolderModal }) => {
       <SpeedDial
         ariaLabel="SpeedDial openIcon example"
         icon={<SpeedDialIcon openIcon={<RemoveIcon />} />}
-        sx={{ alignItems:'end',justifyContent:'end',paddingBottom:'10px',paddingRight:'10px','& .MuiFab-primary': { width: 70, height: 70 }}}
+        sx={{ alignItems:'end',justifyContent:'end',paddingBottom:'10px',paddingRight:'10px','& .MuiFab-primary': { width: 70, height: 70 }, zIndex:'0'}}
       >
         <SpeedDialAction
           key={actions[0].name}

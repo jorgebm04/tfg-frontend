@@ -7,7 +7,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import '../../styles/Main/Tree/Tree.css';
 
 const TreeNode = ({ node }) => {
-  const { name, subFolders, subscriptions } = node;
+  const { name, subfolders, subscriptions } = node;
 
   const [showChildren, setShowChildren] = useState(false);
 
@@ -33,7 +33,7 @@ const TreeNode = ({ node }) => {
       </div>
 
       <ul className={`FolderContainer ${showChildren ? 'show' : ''}`}>
-        {showChildren && <Tree folders={subFolders} />}
+        {showChildren && <Tree folders={subfolders} />}
       </ul>
 
       {subscriptions && subscriptions.length > 0 && (

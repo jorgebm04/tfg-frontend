@@ -16,9 +16,9 @@ const SubscriptionTree = ({ folders, showSubModal, showFolderModal }) => {
     const filtered = [];
   
     for (const folder of folders) {
-      const { name, subFolders, subscriptions } = folder;
+      const { name, subfolders, subscriptions } = folder;
       const matchesSearchQuery = name.toLowerCase().includes(searchQuery.toLowerCase());
-      const filteredSubFolders = filterFolders(subFolders, searchQuery);
+      const filteredSubFolders = filterFolders(subfolders, searchQuery);
       const filteredSubscriptions = subscriptions.filter((subscription) =>
         subscription.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
