@@ -62,7 +62,7 @@ const RegisterForm = () => {
             try{
               request(
                 "POST",
-                "/register",
+                "/users",
                 {
                   name:values.name,
                   surname:values.surname,

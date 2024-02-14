@@ -28,25 +28,19 @@ const SuscriptionMain = () => {
                 alert('You need to log in first!')
                 navigate('/login')
             }
-            request(
-                "GET",
-                "/users/" + userId + "/folders",
-                {}
+            request( "GET", "/users/" + userId + "/folders", {}
             ).then((response) => {
                 setfolders(response.data)
             }).catch((error) => {
                 console.log(error)
             })
-            request(
-                "GET",
-                "/users/" + userId + "/subscriptions",
-                {}
+            request("GET", "/users/" + userId + "/subscriptions", {}
             ).then((response) => {
                 const updatedSubscriptions = response.data.map(subscription => {
                     const { contractDate, subscriptionFrequency } = subscription;
             
                     const today = moment(); // Get the current date
-                    const contractMoment = moment(contractDate, 'MM/DD/YYYY');
+                    const contractMoment = moment(contractDate, 'DD/MM/YYYY');
             
                     // Calculate the number of months between the current date and the contract date
                     const monthsSinceContract = today.diff(contractMoment, 'months');
@@ -58,7 +52,7 @@ const SuscriptionMain = () => {
                     const nextPaymentDate = contractMoment
                       .add(passedPaymentPeriods * subscriptionFrequency, 'months')
                       .add(subscriptionFrequency, 'months')
-                      .format('MM/DD/YYYY');
+                      .format('DD/MM/YYYY');
             
                     return {
                       ...subscription,
@@ -83,7 +77,7 @@ const SuscriptionMain = () => {
 
     function showSubscriptionDetailModal(subscriptionId) {
         setshowSubDetailModal(!showSubDetailModal)
-        setsubDetail(subscriptionId)
+        setsubDetail(subscriptions.find((sub) => sub.subscriptionId === subscriptionId))
     }
 
     function showDetailModal() {
@@ -97,7 +91,7 @@ const SuscriptionMain = () => {
             <SubscriptionList subscriptions={subscriptions} showSubDetailModal={showSubscriptionDetailModal} />
             {showCreateSubModal ? (<CreateSubscriptionForm showModal={showSubModal} userId={userId} folders={folders} />) : null}
             {showCreateFolderModal ? (<CreateFolderForm showModal={showFolderModal} userId={userId} folders={folders} />) : null}
-            {showSubDetailModal ? (<SubscriptionDetailModal showModal={showDetailModal} subscriptionId={subDetail} />) : null} 
+            {showSubDetailModal ? (<SubscriptionDetailModal showModal={showDetailModal} userId={userId} subscription={subDetail} />) : null} 
         </div>)
     } else {
         return (

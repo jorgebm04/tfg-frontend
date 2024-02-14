@@ -45,7 +45,7 @@ const LoginForm = () => {
             try {
               request(
                 "POST",
-                "/login",
+                "/token",
                 {
                   email: values.email,
                   password: values.password,

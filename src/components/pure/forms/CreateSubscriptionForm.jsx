@@ -17,6 +17,23 @@ import dayjs from "dayjs";
 const CreateSubscriptionForm = ({ showModal, userId, folders }) => {
   const navigate = useNavigate();
 
+  const allFolders = [];
+
+  function extract(folder) {
+    const { folderId, name, subfolders } = folder;
+    allFolders.push({ folderId, name });
+
+    if (subfolders.length > 0) {
+      subfolders.forEach((subfolder) => {
+        extract(subfolder);
+      });
+    }
+  }
+
+  folders.forEach((folder) => {
+    extract(folder);
+  });
+
   function parseDateString(value) {
     // Ensure that value is a string before attempting to split
     const dateString =
@@ -74,7 +91,7 @@ const CreateSubscriptionForm = ({ showModal, userId, folders }) => {
       subscriptionEmail: "",
       subscriptionComments: "",
       lastDigitsBank: "",
-      parentFolder: { id: null, name: "" },
+      parentFolder: { folderId: null, name: "" },
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -84,7 +101,7 @@ const CreateSubscriptionForm = ({ showModal, userId, folders }) => {
           "/users/" +
             userId +
             "/folders/" +
-            values.parentFolder.id +
+            values.parentFolder.folderId +
             "/subscriptions",
           {
             name: values.name,
@@ -99,9 +116,9 @@ const CreateSubscriptionForm = ({ showModal, userId, folders }) => {
           }
         )
           .then((response) => {
-            toast.success("Subscripción añadida correctamente");
             showModal();
             navigate(0);
+            toast.success("Subscripción añadida correctamente");
           })
           .catch((error) => {
             toast.error("No se ha podido añadir la suscripcion");
@@ -288,7 +305,7 @@ const CreateSubscriptionForm = ({ showModal, userId, folders }) => {
             <Autocomplete
               id="parentFolderId"
               name="parentFolderId"
-              options={folders}
+              options={allFolders}
               getOptionLabel={(option) => option.name}
               style={{ width: "300px" }}
               onChange={(e, value) => {
@@ -296,6 +313,7 @@ const CreateSubscriptionForm = ({ showModal, userId, folders }) => {
                   "parentFolder",
                   value !== null ? value : formik.initialValues.parentFolder
                 );
+                console.log(value)
               }}
               renderInput={(params) => (
                 <TextField
